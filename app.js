@@ -80,6 +80,8 @@ function customLogo() {
     const text = document.createTextNode(`
     .logo-extension {
         margin-left: .4em;
+        vertical-align: middle;
+        line-height: 46px;
     }
 
     .rainbow {
