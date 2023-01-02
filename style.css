@@ -1,0 +1,15 @@
+.logo-extension {
+    margin-left: .4em;
+    vertical-align: middle;
+    line-height: 46px;
+}
+
+.rainbow {
+    background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.footer {
+    display: none;
+}

@@ -71,27 +71,17 @@ if(window.location.pathname.includes("grade")) {
     addAverage(average);
 };
 
+function customCss() {
+    const head = document.getElementsByTagName("head")[0];
+
+    const style = document.createElement("link");
+    style.setAttribute("rel", "stylesheet");
+    style.setAttribute("href", "https://pisoj.github.io/ed-super/style.css")
+    head.appendChild(style);
+}
 
 function customLogo() {
-    const head = document.getElementsByTagName("head")[0];
     const logoContainer = document.getElementsByClassName("logo")[0];
-
-    const style = document.createElement("style");
-    const text = document.createTextNode(`
-    .logo-extension {
-        margin-left: .4em;
-        vertical-align: middle;
-        line-height: 46px;
-    }
-
-    .rainbow {
-        background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    `);
-    style.appendChild(text);
-    head.appendChild(style);
 
     const superLogoClasses = ["logo-link", "logo-extension", "rainbow"];
     const superLogo = document.createElement("a");
@@ -105,4 +95,5 @@ function customLogo() {
     logoContainer.appendChild(superLogo);
 };
 
+customCss();
 customLogo();
