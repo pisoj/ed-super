@@ -15,6 +15,18 @@
     -webkit-text-fill-color: transparent;
 }
 
+body {
+    background: white;
+}
+
+#page-wrapper {
+    margin: none;
+    padding: none;
+    box-shadow: none;
+    border-radius: none;
+    justify-content: none;
+}
+
 .footer {
     display: none;
 }

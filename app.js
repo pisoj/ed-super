@@ -6,7 +6,7 @@ function getGrades() {
             const gradeFianl = gradeNumbers[j].children;
             for(let k = 0; k < gradeFianl.length; k++) {
                 const grade = gradeFianl[k];
-                gradeList.push(parseInt(grade.innerHTML))
+                gradeList.push(parseInt(grade.innerHTML));
             }
         }
     };
@@ -58,14 +58,14 @@ if(window.location.pathname.includes("grade")) {
     addAverage(average);
 };
 
-function customCss() {
+function customStyle() {
     const head = document.getElementsByTagName("head")[0];
 
     const style = document.createElement("link");
     style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", "https://pisoj.github.io/ed-super/style.css")
+    style.setAttribute("href", "https://pisoj.github.io/ed-super/style.css");
     head.appendChild(style);
-}
+};
 
 function customLogo() {
     const logoContainer = document.getElementsByClassName("logo")[0];
@@ -82,5 +82,5 @@ function customLogo() {
     logoContainer.appendChild(superLogo);
 };
 
-customCss();
+customStyle();
 customLogo();
