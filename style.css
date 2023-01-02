@@ -25,8 +25,9 @@ body {
     box-shadow: none;
     border-radius: 0;
     justify-content: normal;
-    min-height: none;
-    max-height: none;
+    min-height: unset;
+    max-height: unset;
+    align-items: center;
 }
 
 .footer {
