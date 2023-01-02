@@ -20,11 +20,11 @@ body {
 }
 
 #page-wrapper {
-    margin: none;
-    padding: none;
+    margin: 0;
+    padding: 0;
     box-shadow: none;
-    border-radius: none;
-    justify-content: none;
+    border-radius: 0;
+    justify-content: normal;
 }
 
 .footer {
