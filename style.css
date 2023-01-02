@@ -15,6 +15,10 @@
     -webkit-text-fill-color: transparent;
 }
 
+body {
+    background: white;
+}
+
 #page-wrapper {
     margin: 0;
     padding: 0;
