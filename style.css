@@ -3,6 +3,10 @@
     border-bottom-right-radius: 10px;
 }
 
+.logo-link {
+    height: 46px;
+}
+
 body {
     background: white;
 }

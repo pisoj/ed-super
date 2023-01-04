@@ -84,11 +84,15 @@ function customLogo() {
     const logoContainer = document.getElementsByClassName("logo")[0];
     logoContainer.innerHTML = "";
 
-    const superLogo = document.createElement("img");
+    const superLogo = document.createElement("a");
     superLogo.classList.add("logo-link");
-    superLogo.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-256.webp");
     superLogo.setAttribute("href", "/");
 
+    const superLogoImg = document.createElement("img");
+    superLogoImg.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-256.webp");
+    superLogoImg.setAttribute("alt", "eD Super");
+
+    superLogo.appendChild(superLogoImg);
     logoContainer.appendChild(superLogo);
 };
 
