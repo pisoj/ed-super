@@ -86,7 +86,7 @@ function customLogo() {
 
     const superLogo = document.createElement("img");
     superLogo.classList.add("logo-link");
-    superLogo.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-128.webp");
+    superLogo.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-256.webp");
     superLogo.setAttribute("href", "/");
 
     logoContainer.appendChild(superLogo);
