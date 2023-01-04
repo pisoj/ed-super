@@ -6,7 +6,7 @@ function getGrades() {
             const gradeFianl = gradeNumbers[j].children;
             for(let k = 0; k < gradeFianl.length; k++) {
                 const grade = gradeFianl[k];
-                gradeList.push(parseInt(grade.innerHTML));
+                gradeList.push(parseInt(grade.innerHTML))
             }
         }
     };
@@ -25,13 +25,26 @@ function calculateAverage(numbers) {
 function addAverage(average) {
     const color = (average - 1) * 30;
 
+    const head = document.getElementsByTagName("head")[0];
+    const style = document.createElement("style");
+    const text = document.createTextNode(`
+    .grades-average {
+        background: hsl(${color}, 71%, 90%);
+    }
+    .table-end {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+    }
+    `);
+    style.appendChild(text);
+    head.appendChild(style);
+
     const gradesTable = document.getElementsByClassName("grades-table")[0];
     const row = document.createElement("div");
-    const rowClasses = ["flex-table", "row", "table-end"];
+    const rowClasses = ["flex-table", "row", "grades-average", "table-end"];
     for(let i = 0; i < rowClasses.length; i++) {
         row.classList.add(rowClasses[i]);
     };
-    row.setAttribute("style", `background: hsl(${color}, 71%, 90%);`);
 
     const titleColumn = document.createElement("div");
     titleColumn.classList.add("flex-row");
@@ -58,29 +71,26 @@ if(window.location.pathname.includes("grade")) {
     addAverage(average);
 };
 
-function customStyle() {
+function customCss() {
     const head = document.getElementsByTagName("head")[0];
 
     const style = document.createElement("link");
     style.setAttribute("rel", "stylesheet");
-    style.setAttribute("href", "https://pisoj.github.io/ed-super/style.css");
+    style.setAttribute("href", "https://pisoj.github.io/ed-super/style.css")
     head.appendChild(style);
-};
+}
 
 function customLogo() {
     const logoContainer = document.getElementsByClassName("logo")[0];
+    logoContainer.innerHTML = "";
 
-    const superLogoClasses = ["logo-link", "logo-extension", "rainbow"];
-    const superLogo = document.createElement("a");
-    for(let i = 0; i < superLogoClasses.length; i++) {
-        superLogo.classList.add(superLogoClasses[i]);
-    };
+    const superLogo = document.createElement("img");
+    superLogo.classList.add("logo-link");
+    superLogo.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-128.webp");
     superLogo.setAttribute("href", "/");
-    const superLogoText = document.createTextNode("SUPER");
 
-    superLogo.appendChild(superLogoText);
     logoContainer.appendChild(superLogo);
 };
 
-customStyle();
+customCss();
 customLogo();
