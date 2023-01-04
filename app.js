@@ -89,6 +89,7 @@ function customLogo() {
     superLogo.setAttribute("href", "/");
 
     const superLogoImg = document.createElement("img");
+    superLogoImg.classList.add("logo-img");
     superLogoImg.setAttribute("src", "https://pisoj.github.io/ed-super/img/logo-256.webp");
     superLogoImg.setAttribute("alt", "eD Super");
 
