@@ -31,6 +31,7 @@ function addAverage(average) {
     for(let i = 0; i < rowClasses.length; i++) {
         row.classList.add(rowClasses[i]);
     };
+    row.setAttribute("style", `background: hsl(${color}, 71%, 90%);`);
 
     const titleColumn = document.createElement("div");
     titleColumn.classList.add("flex-row");
@@ -43,7 +44,6 @@ function addAverage(average) {
     for(let i = 0; i < valueColumnClasses.length; i++) {
         valueColumn.classList.add(valueColumnClasses[i]);
     };
-    valueColumn.setAttribute("style", `background: hsl(${color}, 71%, 90%);`);
     const valueColumnText = document.createTextNode(String(average.toFixed(2)));
     valueColumn.appendChild(valueColumnText);
 
