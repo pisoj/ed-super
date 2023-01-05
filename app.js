@@ -102,9 +102,9 @@ if(window.location.pathname.includes("grade")) {
     
     addAverage(average);
 };
-
-app.setUseWideViewPort(false);
     
 customCss();
 customLogo();
 removeModal();
+
+app.setUseWideViewPort(false);
