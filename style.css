@@ -7,17 +7,8 @@
     height: 46px;
 }
 
-body {
-    background: white;
-}
-
-#page-wrapper {
-    margin: 0;
-    padding: 0;
-    box-shadow: none;
-    border-radius: 0;
-    justify-content: normal;
-    background: transparent;
+#header .logged-in-user {
+    display: block !important;
 }
 
 .footer {

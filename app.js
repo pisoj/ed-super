@@ -25,20 +25,6 @@ function calculateAverage(numbers) {
 function addAverage(average) {
     const color = (average - 1) * 30;
 
-    const head = document.getElementsByTagName("head")[0];
-    const style = document.createElement("style");
-    const text = document.createTextNode(`
-    .grades-average {
-        background: hsl(${color}, 71%, 90%);
-    }
-    .table-end {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
-    }
-    `);
-    style.appendChild(text);
-    head.appendChild(style);
-
     const gradesTable = document.getElementsByClassName("grades-table")[0];
     const row = document.createElement("div");
     const rowClasses = ["flex-table", "row", "grades-average", "table-end"];
@@ -53,8 +39,11 @@ function addAverage(average) {
     titleColumn.appendChild(titleColumnText);
 
     const valueColumn = document.createElement("div");
-    valueColumn.classList.add("flex-row");
-    valueColumn.classList.add("head");
+    const valueColumnClasses = ["flex-row", "head", "table-end"];
+    for(let i = 0; i < valueColumnClasses.length; i++) {
+        valueColumn.classList.add(valueColumnClasses[i]);
+    };
+    valueColumn.setAttribute("style", `background: hsl(${color}, 71%, 90%);`);
     const valueColumnText = document.createTextNode(String(average.toFixed(2)));
     valueColumn.appendChild(valueColumnText);
 
@@ -90,11 +79,6 @@ function customLogo() {
     logoContainer.appendChild(superLogo);
 };
 
-function removeModal() {
-    const myModal = document.getElementById("myModal");
-    myModal.remove();
-};
-
 
 if(window.location.pathname.includes("grade")) {
     const grades = getGrades();
@@ -105,4 +89,3 @@ if(window.location.pathname.includes("grade")) {
     
 customCss();
 customLogo();
-removeModal();
