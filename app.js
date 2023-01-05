@@ -97,5 +97,12 @@ function customLogo() {
     logoContainer.appendChild(superLogo);
 };
 
+function removeModal() {
+    const myModal = document.getElementById("myModal");
+    myModal.remove();
+}
+
 customCss();
 customLogo();
+removeModal();
+app.setUseWideViewPort(false);
