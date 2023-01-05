@@ -105,4 +105,3 @@ function removeModal() {
 customCss();
 customLogo();
 removeModal();
-app.setUseWideViewPort(false);
