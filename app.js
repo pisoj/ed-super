@@ -95,17 +95,16 @@ function removeModal() {
     myModal.remove();
 };
 
-!function() {
-    app.setUseWideViewPort(false);
 
-    if(window.location.pathname.includes("grade")) {
-        const grades = getGrades();
-        const average = calculateAverage(grades);
+app.setUseWideViewPort(false);
+
+if(window.location.pathname.includes("grade")) {
+    const grades = getGrades();
+    const average = calculateAverage(grades);
     
-        addAverage(average);
-    };
-    
-    customCss();
-    customLogo();
-    removeModal();
+    addAverage(average);
 };
+    
+customCss();
+customLogo();
+removeModal();
