@@ -96,14 +96,14 @@ function removeModal() {
 };
 
 
-app.setUseWideViewPort(false);
-
 if(window.location.pathname.includes("grade")) {
     const grades = getGrades();
     const average = calculateAverage(grades);
     
     addAverage(average);
 };
+
+app.setUseWideViewPort(false);
     
 customCss();
 customLogo();
