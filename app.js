@@ -106,5 +106,3 @@ if(window.location.pathname.includes("grade")) {
 customCss();
 customLogo();
 removeModal();
-
-app.setUseWideViewPort(false);
