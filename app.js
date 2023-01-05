@@ -64,13 +64,6 @@ function addAverage(average) {
     gradesTable.appendChild(row);
 };
 
-if(window.location.pathname.includes("grade")) {
-    const grades = getGrades();
-    const average = calculateAverage(grades);
-
-    addAverage(average);
-};
-
 function customCss() {
     const head = document.getElementsByTagName("head")[0];
 
@@ -100,8 +93,19 @@ function customLogo() {
 function removeModal() {
     const myModal = document.getElementById("myModal");
     myModal.remove();
-}
+};
 
-customCss();
-customLogo();
-removeModal();
+!function() {
+    app.setUseWideViewPort(false);
+
+    if(window.location.pathname.includes("grade")) {
+        const grades = getGrades();
+        const average = calculateAverage(grades);
+    
+        addAverage(average);
+    };
+    
+    customCss();
+    customLogo();
+    removeModal();
+};
