@@ -1,7 +1,7 @@
-<div style="text-align: center;">
+<p align="center">
     <img style="height: 12rem;" src="https://pisoj.github.io/ed-super/img/logo-256.webp" alt="eDnevnik Super" />
-    <h1>Pravila o privatnosti</h1>
-</div>
+    <h1 align="center">Pravila o privatnosti</h1>
+</p>
 
 > **Napomena:** eDnevnik Super temelji se na CARNET-ovoj usluzi _e-Dnevnik za učenike i roditelje_ koja ima svoja vlastita pravila o privatnosti. Možete ih pronaći [ovdje](https://ocjene.skole.hr/privacy_notice).
 
