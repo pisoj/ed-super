@@ -1,5 +1,5 @@
 <p align="center">
-    <img style="height: 12rem;" src="https://pisoj.github.io/ed-super/img/logo-256.webp" alt="eDnevnik Super" />
+    <img style="height: 8rem;" src="https://pisoj.github.io/ed-super/img/logo-256.webp" alt="eDnevnik Super" />
     <h1 align="center">Pravila o privatnosti</h1>
 </p>
 
