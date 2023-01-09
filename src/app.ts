@@ -8,9 +8,17 @@ export abstract class Average {
         return average.toFixed(2);
     }
 
-    private color(average: number) {
+    static formatInt(average: number) {
+        return Math.round(average);
+    }
+ 
+    static color(average: number) {
         const color = (average - 1) * 30;
         return `hsl(${color}, 71%, 90%)`;
+    }
+
+    static colored(element: Element, average: number) {
+        element.setAttribute("style", `background: ${Average.color(average)};`);
     }
 
     protected showAverage(grades: number[], gradesTable: Element, extraDivs = 0) {
@@ -21,7 +29,7 @@ export abstract class Average {
         for(let i = 0; i < rowClasses.length; i++) {
             row.classList.add(rowClasses[i]);
         };
-        row.setAttribute("style", `background: ${this.color(average)};`);
+        Average.colored(row, average);
     
         for(let i = 0; i < extraDivs; i++) {
             const column = document.createElement("div");
@@ -111,16 +119,50 @@ class AllSubjectsAverage extends Average {
     
     private calculateSubjectAverage(subject: Element) {
         const gradeList = this.getGrades(subject);
-        if(gradeList.length === 0) return;
+        if(gradeList.length === 0) return null;
         super.showAverage(gradeList, subject, 2);
+        return Average.calculate(gradeList);
+    }
+
+    private calculateOverallSuccess(menu: Element, title: Element, button: HTMLElement, finalGrades: number[]) {
+        const overallSuccess = Average.calculate(finalGrades);
+        const color = Average.color(overallSuccess);
+
+        Average.colored(menu, overallSuccess);
+        title.classList.add("black");
+        button.onclick = null;
+        button.textContent = Average.format(overallSuccess);
+    }
+
+    // TODO: What if class is finished?
+
+    private showOverallSuccess(finalGrades: number[]) {
+        const menu = document.querySelector(".dropdown-menu-wrapper");
+        menu.classList.remove("js-dropdown-menu");
+        menu.querySelector(".dropdown-content").remove();
+        menu.querySelector(".icon-angle-down").remove();
+        
+        const title = menu.querySelector(".dropdown-title span");
+        title.textContent = "OPĆI USPJEH:";
+
+        const button = document.createElement("span");
+        button.textContent = "Izračunaj";
+        button.onclick = () => {
+            this.calculateOverallSuccess(menu, title, button, finalGrades);
+        };
+        menu.appendChild(button);
     }
     
     show() {
+        const finalGrades: number[] = [];
         const subjects = this.getSubjects();
         for(let i = 0; i < subjects.length; i++) {
             const subject = subjects[i];
-            this.calculateSubjectAverage(subject);
+            const subjectAverage = this.calculateSubjectAverage(subject);
+            if(subjectAverage === null) continue;
+            finalGrades.push(Average.formatInt(subjectAverage));
         }
+        this.showOverallSuccess(finalGrades);
     }
 }
 
