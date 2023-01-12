@@ -166,14 +166,9 @@ class AllSubjectsAverage extends Average {
     }
 }
 
-function removeLogo() {
+function customLogo() {
     const logoContainer = document.getElementsByClassName("logo")[0];
     logoContainer.innerHTML = "";
-    return logoContainer;
-}
-
-function customLogo() {
-    const logoContainer = removeLogo();
 
     const superLogo = document.createElement("a");
     superLogo.classList.add("logo-link");
@@ -205,7 +200,7 @@ function demoLogin() {
 function choseFeature() {
     if(location.pathname.indexOf("login") !== -1) {
         demoLogin();
-        removeLogo();
+        document.querySelector(".login-header").remove();
         return;
     }
 
