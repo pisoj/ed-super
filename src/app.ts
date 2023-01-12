@@ -191,6 +191,7 @@ function demoLogin() {
         const password = loginForm.querySelector('input[name="password"]') as HTMLInputElement;
         if(password.value != "man") return;
         event.preventDefault();
+        alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
         location.replace("https://pisoj.github.io/ed-super/demo/class.html");
     };
 }
