@@ -181,10 +181,27 @@ function customLogo() {
 
     superLogo.appendChild(superLogoImg);
     logoContainer.appendChild(superLogo);
-};
+}
+
+function demoLogin() {
+    const loginForm = document.querySelector(".form-login") as HTMLElement;
+    loginForm.onsubmit = (event) => {
+        const username = loginForm.querySelector('input[name="username"]') as HTMLInputElement;
+        if(username.value != "super") return;
+        const password = loginForm.querySelector('input[name="password"]') as HTMLInputElement;
+        if(password.value != "man") return;
+        event.preventDefault();
+        location.replace("https://pisoj.github.io/ed-super/demo/class.html");
+    };
+}
 
 
 function choseFeature() {
+    if(location.pathname.indexOf("login") !== -1) {
+        demoLogin();
+        return;
+    }
+
     if(location.pathname.indexOf("grade") !== -1 && location.pathname.indexOf("all") !== -1) {
         const allSubjectsAverage = new AllSubjectsAverage;
         allSubjectsAverage.show();
