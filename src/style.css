@@ -11,6 +11,10 @@
     height: 46px;
 }
 
+.login-body {
+    margin-top: 2rem;
+}
+
 #header .logged-in-user {
     display: block !important;
 }
