@@ -1,6 +1,6 @@
 module.exports = {
     mode: "production",
-    entry: ["./src/app.ts", "./src/style.css"],
+    entry: ["./src/style.css", "./src/app.ts"],
     module: {
         rules: [
             {
@@ -27,6 +27,5 @@ module.exports = {
     },
     output: {
         filename: "app.js",
-        path: __dirname,
     },
 };
