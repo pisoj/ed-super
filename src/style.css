@@ -1,3 +1,8 @@
+:root {
+    --muted-color: #e1e1e1;
+    --border-radius: 4px;
+}
+
 .black {
     color: black;
 }
@@ -21,4 +26,40 @@
 
 .footer {
     display: none;
+}
+
+
+.input-extension {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    border-radius: var(--border-radius);
+    margin: 5px 0 5px 0;
+    border: 1px solid var(--muted-color);
+}
+
+.input-extension > input {
+    border: none;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    z-index: 1;
+}
+
+.input-extension > :not(input) {
+    padding: 0 10px 0 10px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    background: var(--muted-color);
+}
+
+.input-extension > :first-child {
+    border-top-left-radius: var(--border-radius);
+    border-bottom-left-radius: var(--border-radius);
+}
+
+.input-extension > :last-child {
+    border-top-right-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
 }

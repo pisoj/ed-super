@@ -1,4 +1,8 @@
-export abstract class Average {
+interface Feature {
+    show(): void
+}
+
+export abstract class Average implements Feature {
     static calculate(numbers: number[]) {
         const sum = numbers.reduce((partialSum, x) => partialSum + x, 0);
         return sum / numbers.length;
@@ -166,6 +170,74 @@ class AllSubjectsAverage extends Average {
     }
 }
 
+class Login implements Feature {
+    private getLoginForm() {
+        return document.querySelector<HTMLElement>(".form-login");
+    }
+
+    private getUsername(loginForm: HTMLElement) {
+        return loginForm.querySelector<HTMLInputElement>('input[name="username"]');
+    }
+
+    private getPassword(loginForm: HTMLElement) {
+        return loginForm.querySelector<HTMLInputElement>('input[name="password"]');
+    }
+
+    private demoLogin(loginForm: HTMLElement) {
+        loginForm.onsubmit = (event) => {
+            const username = this.getUsername(loginForm);
+            if(username.value !== "super") return;
+            const password = this.getPassword(loginForm);
+            if(password.value !== "man") return;
+            event.preventDefault();
+            alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
+            location.replace("https://pisoj.github.io/ed-super/demo/class.html");
+        };
+    }
+
+    private customStyle(loginForm: HTMLElement) {
+        const username = this.getUsername(loginForm);
+        document.querySelector(".login-header").remove();
+
+        const usernameField = document.createElement("div");
+        usernameField.classList.add("input-extension");
+        usernameField.appendChild(username.cloneNode(true));
+
+        const usernameExtension = document.createElement("span");
+        usernameExtension.textContent = "@skole.hr";
+        usernameField.appendChild(usernameExtension);
+
+        username.replaceWith(usernameField);
+    }
+
+    show() {
+        const loginForm = this.getLoginForm();
+        this.demoLogin(loginForm);
+        this.customStyle(loginForm);
+    }
+}
+
+
+function choseFeature() {
+    if(location.pathname.indexOf("login") !== -1) {
+        const login = new Login;
+        login.show();
+        return;
+    }
+
+    if(location.pathname.indexOf("grade") !== -1 && location.pathname.indexOf("all") !== -1) {
+        const allSubjectsAverage = new AllSubjectsAverage;
+        allSubjectsAverage.show();
+        return;
+    }
+
+    if(location.pathname.indexOf("grade") !== -1) {
+        const subjectAverage = new SubjectAverage;
+        subjectAverage.show();
+        return;
+    }
+}
+
 function customLogo() {
     const logoContainer = document.getElementsByClassName("logo")[0];
     logoContainer.innerHTML = "";
@@ -183,41 +255,7 @@ function customLogo() {
     logoContainer.appendChild(superLogo);
 }
 
-function demoLogin() {
-    const loginForm = document.querySelector(".form-login") as HTMLElement;
-    loginForm.onsubmit = (event) => {
-        const username = loginForm.querySelector('input[name="username"]') as HTMLInputElement;
-        if(username.value != "super") return;
-        const password = loginForm.querySelector('input[name="password"]') as HTMLInputElement;
-        if(password.value != "man") return;
-        event.preventDefault();
-        alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
-        location.replace("https://pisoj.github.io/ed-super/demo/class.html");
-    };
-}
-
-
-function choseFeature() {
-    if(location.pathname.indexOf("login") !== -1) {
-        demoLogin();
-        document.querySelector(".login-header").remove();
-        return;
-    }
-
-    if(location.pathname.indexOf("grade") !== -1 && location.pathname.indexOf("all") !== -1) {
-        const allSubjectsAverage = new AllSubjectsAverage;
-        allSubjectsAverage.show();
-        return;
-    }
-
-    if(location.pathname.indexOf("grade") !== -1) {
-        const subjectAverage = new SubjectAverage;
-        subjectAverage.show();
-        return;
-    }
-}
-
 if(typeof document !== 'undefined') {
-    customLogo();
     choseFeature();
+    customLogo();
 }
