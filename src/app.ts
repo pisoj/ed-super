@@ -171,23 +171,57 @@ class AllSubjectsAverage extends Average {
 }
 
 class Login implements Feature {
-    private getLoginForm() {
-        return document.querySelector<HTMLElement>(".form-login");
+    static login(username: string, password: string) {
+        const loginForm = this.getLoginForm();
+        this.getUsername(loginForm).value = username;
+        this.getPassword(loginForm).value = password;
+        loginForm.submit();
     }
 
-    private getUsername(loginForm: HTMLElement) {
+    static handleAccountSaving() {
+        // @ts-ignore
+        const tmp = app.readTmp()
+        if(tmp === "") return;
+        const tmpSplit = tmp.split(";");
+        const username = tmpSplit[0];
+        const password = tmpSplit[1];
+        const fullname = this.getFullName();
+
+        // @ts-ignore
+        app.addAccount(username, password, fullname);
+        // @ts-ignore
+        app.writeTmp("");
+    }
+
+    static getFullName() {
+        return document.querySelector(".user-name").children[0].textContent;
+    }
+
+    static getLoginForm() {
+        return document.querySelector<HTMLFormElement>(".form-login");
+    }
+
+    static getUsername(loginForm: HTMLElement) {
         return loginForm.querySelector<HTMLInputElement>('input[name="username"]');
     }
 
-    private getPassword(loginForm: HTMLElement) {
+    static getPassword(loginForm: HTMLElement) {
         return loginForm.querySelector<HTMLInputElement>('input[name="password"]');
+    }
+
+    static getRememberMe(loginForm: HTMLElement) {
+        return loginForm.querySelector<HTMLInputElement>('#remember-me');
+    }
+
+    static getSubmit(loginForm: HTMLElement) {
+        return loginForm.querySelector<HTMLInputElement>('input[type="submit"]');
     }
 
     private demoLogin(loginForm: HTMLElement) {
         loginForm.onsubmit = (event) => {
-            const username = this.getUsername(loginForm);
+            const username = Login.getUsername(loginForm);
             if(username.value !== "super") return;
-            const password = this.getPassword(loginForm);
+            const password = Login.getPassword(loginForm);
             if(password.value !== "man") return;
             event.preventDefault();
             alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
@@ -195,8 +229,38 @@ class Login implements Feature {
         };
     }
 
-    private customStyle(loginForm: HTMLElement) {
-        const username = this.getUsername(loginForm);
+    private handleRememberMe(loginForm: HTMLElement) {
+        loginForm.onsubmit = () => {
+            if(!Login.getRememberMe(loginForm).checked) return;
+            // @ts-ignore
+            app.writeTmp(`${Login.getUsername(loginForm).value};${Login.getPassword(loginForm).value}`);
+        }
+    }
+
+    private addRememberMe(loginForm: HTMLElement) {
+        const container = document.createElement("div");
+        container.classList.add("line");
+
+        const checkbox = document.createElement("input");
+        checkbox.setAttribute("type", "checkbox");
+        checkbox.setAttribute("id", "remember-me");
+        checkbox.checked = true;
+
+        const label = document.createElement("label");
+        label.setAttribute("for", "remember-me");
+        label.textContent = "Zapamti me";
+
+        container.appendChild(checkbox);
+        container.appendChild(label);
+        
+        Login.getSubmit(loginForm).before(container);
+
+        this.handleRememberMe(loginForm);
+    }
+
+
+    private addUsernameExtension(loginForm: HTMLElement) {
+        const username = Login.getUsername(loginForm);
         document.querySelector(".login-header").remove();
 
         const usernameField = document.createElement("div");
@@ -211,9 +275,15 @@ class Login implements Feature {
     }
 
     show() {
-        const loginForm = this.getLoginForm();
+        const loginForm = Login.getLoginForm();
         this.demoLogin(loginForm);
-        this.customStyle(loginForm);
+        this.addRememberMe(loginForm);
+        // @ts-ignore
+        if(typeof app !== "undefined") {
+            // @ts-ignore
+            app.selectAccount();
+        }
+        this.addUsernameExtension(loginForm);
     }
 }
 
@@ -222,6 +292,13 @@ function choseFeature() {
     if(location.pathname.indexOf("login") !== -1) {
         const login = new Login;
         login.show();
+        return;
+    }
+
+    customLogo();
+
+    if(location.pathname.indexOf("class") !== -1) {
+        Login.handleAccountSaving();
         return;
     }
 
@@ -257,5 +334,4 @@ function customLogo() {
 
 if(typeof document !== 'undefined') {
     choseFeature();
-    customLogo();
 }
