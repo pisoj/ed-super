@@ -284,6 +284,8 @@ class Login implements Feature {
         // @ts-ignore
         if(typeof app !== "undefined") {
             // @ts-ignore
+            window.Login = Login;
+            // @ts-ignore
             app.selectAccount();
         }
         this.addUsernameExtension(loginForm);

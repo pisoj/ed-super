@@ -1,5 +1,5 @@
 module.exports = {
-    mode: "development",
+    mode: "production",
     entry: ["./src/style.css", "./src/app.ts"],
     module: {
         rules: [
