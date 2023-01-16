@@ -217,24 +217,27 @@ class Login implements Feature {
         return loginForm.querySelector<HTMLInputElement>('input[type="submit"]');
     }
 
-    private demoLogin(loginForm: HTMLElement) {
+    private onLogin(loginForm: HTMLElement) {
         loginForm.onsubmit = (event) => {
-            const username = Login.getUsername(loginForm);
-            if(username.value !== "super") return;
-            const password = Login.getPassword(loginForm);
-            if(password.value !== "man") return;
-            event.preventDefault();
-            alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
-            location.replace("https://pisoj.github.io/ed-super/demo/class.html");
-        };
+            this.demoLogin(loginForm, event);
+            this.handleRememberMe(loginForm);
+        }
+    }
+
+    private demoLogin(loginForm: HTMLElement, event: SubmitEvent) {
+        const username = Login.getUsername(loginForm);
+        if(username.value !== "super") return;
+        const password = Login.getPassword(loginForm);
+        if(password.value !== "man") return;
+        event.preventDefault();
+        alert("Ovo je testno okruženje! Upozoravamo da neke funkcije možda neće raditi.");
+        location.replace("https://pisoj.github.io/ed-super/demo/class.html");
     }
 
     private handleRememberMe(loginForm: HTMLElement) {
-        loginForm.onsubmit = () => {
-            if(!Login.getRememberMe(loginForm).checked) return;
+        if(!Login.getRememberMe(loginForm).checked) return;
             // @ts-ignore
             app.writeTmp(`${Login.getUsername(loginForm).value};${Login.getPassword(loginForm).value}`);
-        }
     }
 
     private addRememberMe(loginForm: HTMLElement) {
@@ -276,7 +279,7 @@ class Login implements Feature {
 
     show() {
         const loginForm = Login.getLoginForm();
-        this.demoLogin(loginForm);
+        this.onLogin(loginForm);
         this.addRememberMe(loginForm);
         // @ts-ignore
         if(typeof app !== "undefined") {
