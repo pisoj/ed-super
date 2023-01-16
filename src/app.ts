@@ -175,7 +175,7 @@ class Login implements Feature {
         const loginForm = this.getLoginForm();
         this.getUsername(loginForm).value = username;
         this.getPassword(loginForm).value = password;
-        loginForm.submit();
+        loginForm.requestSubmit();
     }
 
     static handleAccountSaving() {
