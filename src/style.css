@@ -77,3 +77,16 @@ input[type="checkbox"] {
 input[type="checkbox"] + label {
     margin-left: .5rem;
 }
+
+details[open] .content {
+    animation: sweep ease-out .5s;
+}
+
+@keyframes sweep {
+    0% {
+        opacity: 0; transform: translateX(-40vw)
+    }
+    100% {
+        opacity: 1; transform: translateX(0)
+    }
+}

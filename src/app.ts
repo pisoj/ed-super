@@ -138,8 +138,6 @@ class AllSubjectsAverage extends Average {
         button.textContent = Average.format(overallSuccess);
     }
 
-    // TODO: What if class is finished?
-
     private showOverallSuccess(finalGrades: number[]) {
         const menu = document.querySelector(".dropdown-menu-wrapper");
         menu.classList.remove("js-dropdown-menu");
@@ -156,6 +154,26 @@ class AllSubjectsAverage extends Average {
         };
         menu.appendChild(button);
     }
+
+    private makeSubjectCollapsible(subject: Element) {
+        const summary = document.createElement("summary");
+        summary.appendChild(subject.firstElementChild);
+        summary.appendChild(subject.firstElementChild);
+
+        const content = document.createElement("div");
+        content.classList.add("content");
+
+        while(subject.firstElementChild) {
+            if(subject.firstElementChild.hasAttribute("style")) break;
+            content.appendChild(subject.firstElementChild);
+        }
+
+        const details = document.createElement("details");
+        details.appendChild(summary);
+        details.appendChild(content);
+
+        subject.prepend(details);
+    }
     
     show() {
         const finalGrades: number[] = [];
@@ -165,6 +183,7 @@ class AllSubjectsAverage extends Average {
             const subjectAverage = this.calculateSubjectAverage(subject);
             if(subjectAverage === null) continue;
             finalGrades.push(Average.formatInt(subjectAverage));
+            this.makeSubjectCollapsible(subject);
         }
         this.showOverallSuccess(finalGrades);
     }
