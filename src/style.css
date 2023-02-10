@@ -1,6 +1,8 @@
 :root {
     --muted-color: #e1e1e1;
     --border-radius: 4px;
+    --table-border-radius: 10px;
+    --medium-table-row-min-height: 2.2em;
 }
 
 .black {
@@ -8,8 +10,8 @@
 }
 
 .table-end {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: var(--table-border-radius);
+    border-bottom-right-radius: var(--table-border-radius);
 }
 
 .logo-img {
@@ -70,6 +72,7 @@
 
 input[type="checkbox"] {
     -webkit-appearance: checkbox;
+    appearance: checkbox;
     height: 1.5rem;
     width: 1.5rem;
 }
@@ -78,15 +81,20 @@ input[type="checkbox"] + label {
     margin-left: .5rem;
 }
 
-details[open] .content {
-    animation: sweep ease-out .5s;
+@media (max-width: 767px) {
+    .new-grades-table .table-end {
+        border-radius: var(--table-border-radius);
+        margin-top: .4rem;
+        padding: 0 0 .3rem .5rem;
+    }
 }
 
-@keyframes sweep {
-    0% {
-        opacity: 0; transform: translateX(-40vw)
+@media (min-width: 768px) {
+    .flex-table.header.first {
+        min-height: var(--medium-table-row-min-height);
     }
-    100% {
-        opacity: 1; transform: translateX(0)
+
+    .table-end {
+        min-height: var(--medium-table-row-min-height);
     }
 }

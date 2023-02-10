@@ -18,7 +18,8 @@ export abstract class Average implements Feature {
  
     static color(average: number) {
         const color = (average - 1) * 30;
-        return `hsl(${color}, 71%, 90%)`;
+        const light = 81 + (average - 1) * 3.5;
+        return `hsl(${color}, 71%, ${light}%)`;
     }
 
     static colored(element: Element, average: number) {
